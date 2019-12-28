@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-do List App</title>
+</head>
+
+<body>
+    <h1> Todo will be completed soon! </h1>
+    <div id="todos"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        /*
+        axios.post('/api/todos', {
+            task: "do project 2",
+            done: "false"
+        }).then(function(res){
+            console.log(res);
+        }).catch(function (err){
+            console.log(err);
+        });
+        */
+        axios.get('/api/todos')
+            .then(function (response) {
+                console.log(response);
+
+                const todosEl = document.getElementById("todos")
+
+                const todoElStr = response.data.map(todo => `<div>${todo.task}</div>`)
+
+                const innerHtml = todoElStr.join("\n<hr />\n")
+
+                todosEl.innerHTML = innerHtml
+
+                console.log(innerHtml);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    </script>
+
+</body>
+
+</html>
